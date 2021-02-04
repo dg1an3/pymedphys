@@ -19,7 +19,7 @@
 
 from typing import Dict, List, Tuple
 
-from pymedphys._imports import pymssql
+from pymedphys._imports import sqlalchemy
 
 from . import credentials as _credentials
 
@@ -27,7 +27,7 @@ from . import credentials as _credentials
 class Connection:
     """A Mosaiq DB Connection object.
 
-    A wrapper around the ``pymssql.Connection`` object.
+    A wrapper around the ``sqlalchemy.engine.Connection`` object.
     """
 
     def __init__(
@@ -39,10 +39,13 @@ class Connection:
         database: str = "MOSAIQ",
     ):
         try:
-            self._connection = pymssql.connect(
-                hostname, username, password, database=database, port=port
+            connection_str = (
+                f"mssql+pymssql://{username}:{password}@{hostname}:{port}/{database}"
             )
-        except pymssql.OperationalError as error:
+            self._engine = sqlalchemy.create_engine(connection_str, echo=False)
+            self._metadata = sqlalchemy.MetaData()
+            self._connection = self._engine.connect()
+        except sqlalchemy.exc.SQLAlchemyError as error:
             error_message = error.args[0][1]
             if error_message.startswith(b"Login failed for user"):
                 raise _credentials.WrongUsernameOrPassword(
@@ -51,8 +54,20 @@ class Connection:
 
             raise
 
+    def get_table(self, tablename):
+        return sqlalchemy.schema.Table(
+            tablename, self._metadata, autoload=True, autoload_with=self._engine
+        )
+
+    def execute(self, statement: sqlalchemy.sql.expression.Executable):
+        try:
+            return self._engine.execute(statement)
+        except sqlalchemy.exc.SQLAlchemyError as error:
+            print(error)
+            raise
+
     def cursor(self) -> "Cursor":
-        return Cursor(self._connection)
+        return Cursor(self._engine.raw_connection())
 
     def close(self):
         self._connection.close()
@@ -67,11 +82,11 @@ class Connection:
 class Cursor:
     """A Mosaiq DB Cursor object.
 
-    A wrapper around the ``pymssql.Cursor`` object.
+    A wrapper around the ``DBAPI Cursor`` object.
     """
 
-    def __init__(self, connection: "pymssql.Connection"):
-        self._cursor = connection.cursor()
+    def __init__(self, dbapi_connection):
+        self._cursor = dbapi_connection.cursor()
 
     def close(self):
         self._cursor.close()
