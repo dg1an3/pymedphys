@@ -54,6 +54,9 @@ class Connection:
 
             raise
 
+    def get_engine(self):
+        return self._engine
+
     def get_table(self, tablename):
         return sqlalchemy.schema.Table(
             tablename, self._metadata, autoload=True, autoload_with=self._engine
