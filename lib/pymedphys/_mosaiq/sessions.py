@@ -2,9 +2,12 @@
 
 from datetime import datetime, timedelta
 
-from pymedphys._imports import sklearn
+from pymedphys._imports import sklearn, sqlalchemy
 
 from pymedphys import mosaiq
+from pymedphys._mosaiq.connect import Connection
+
+select = sqlalchemy.sql.select
 
 
 def cluster_sessions(tx_datetimes, interval=timedelta(hours=3)):
@@ -85,7 +88,7 @@ def cluster_sessions(tx_datetimes, interval=timedelta(hours=3)):
     yield (current_session_number, start_session, end_session)
 
 
-def sessions_for_site(connection, sit_set_id):
+def sessions_for_site(connection: Connection, sit_set_id):
     """Determines the sessions for the given site (by SIT_SET_ID)
 
     uses cluster_sessions after querying for the Dose_Hst.Tx_DtTm
@@ -103,19 +106,13 @@ def sessions_for_site(connection, sit_set_id):
     generated sequence of session tuples
         same format as returned by cluster_sessions
     """
-    result = mosaiq.execute(
-        connection,
-        """
-        SELECT
-            Tx_DtTm
-        FROM Dose_Hst
-        INNER JOIN
-            Site ON Site.SIT_ID = Dose_Hst.SIT_ID
-        WHERE
-            Site.SIT_SET_ID = %(sit_set_id)s
-        ORDER BY Dose_Hst.Tx_DtTm
-        """,
-        {"sit_set_id": sit_set_id},
+
+    site_t = connection.get_table("Site")
+    dose_hst_t = connection.get_table("Dose_Hst")
+    result = connection.execute(
+        select(dose_hst_t.c.Tx_DtTm)
+        .join(site_t)
+        .where(site_t.c.SIT_SET_ID == sit_set_id)
     )
 
     # cluster_sessions expects a sorted list, so extract
@@ -154,30 +151,23 @@ def session_offsets_for_site(connection, sit_set_id, interval=timedelta(hours=1)
         # calculate the time window within which the offset may occur
         window_start, window_end = (start_session - interval, end_session)
 
-        # query for offsets within the time window
-        result = mosaiq.execute(
-            connection,
-            """
-            SELECT
-                Study_DtTm,
-                Superior_Offset,
-                Anterior_Offset,
-                Lateral_Offset
-            FROM Offset
-            WHERE
-                Version = 0
-                AND Offset.Offset_State IN (1,2) -- active/complete offsets
-                AND Offset.Offset_Type IN (3,4) -- Portal/ThirdParty offsets
-                AND Offset.SIT_SET_ID = %(sit_set_id)s
-                AND %(window_start)s < Offset.Study_DtTm
-                AND Offset.Study_DtTm < %(window_end)s
-            ORDER BY Study_DtTm
-            """,
-            {
-                "sit_set_id": sit_set_id,
-                "window_start": window_start.strftime("%Y-%m-%d %H:%M"),
-                "window_end": window_end.strftime("%Y-%m-%d %H:%M"),
-            },
+        offset_t = connection.get_table("Offset")
+        result = connection.execute(
+            select(
+                offset_t.c.Study_DtTm,
+                offset_t.c.Superior_Offset,
+                offset_t.c.Anterior_Offset,
+                offset_t.c.Lateral_Offset,
+            )
+            .where(
+                offset_t.c.Version == 0
+                and offset_t.c.Offset_State.in_([1, 2])
+                and offset_t.c.Offset_Type.in_([3, 4])
+                and offset_t.c.SIT_SET_ID == sit_set_id
+                and window_start < offset_t.c.Study_DtTm
+                and offset_t.c.Study_DtTm < window_end
+            )
+            .order(offset_t.c.Study_DtTm)
         )
 
         # just take the first offset, for now
