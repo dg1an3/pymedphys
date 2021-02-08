@@ -465,7 +465,7 @@
               <div>
                 
   <h1>Source code for pymedphys._dicom.dose</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Copyright (C) 2016-2019 Matthew Jennings and Simon Biggs</span>
+<span></span><span class="c1"># Copyright (C) 2016-2021 Matthew Jennings and Simon Biggs</span>
 
 <span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
 <span class="c1"># you may not use this file except in compliance with the License.</span>
@@ -481,12 +481,16 @@
 
 <span class="sd">&quot;&quot;&quot;A DICOM RT Dose toolbox&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span>
+
 <span class="kn">from</span> <span class="nn">pymedphys._imports</span> <span class="kn">import</span> <span class="n">matplotlib</span>
 <span class="kn">from</span> <span class="nn">pymedphys._imports</span> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 <span class="kn">from</span> <span class="nn">pymedphys._imports</span> <span class="kn">import</span> <span class="n">plt</span><span class="p">,</span> <span class="n">pydicom</span><span class="p">,</span> <span class="n">scipy</span>
 
 <span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="n">IMAGE_ORIENTATION_MAP</span>
-<span class="kn">from</span> <span class="nn">.coords</span> <span class="kn">import</span> <span class="n">xyz_axes_from_dataset</span>
+<span class="kn">from</span> <span class="nn">.coords</span> <span class="kn">import</span> <span class="n">coords_in_datasets_are_equal</span><span class="p">,</span> <span class="n">xyz_axes_from_dataset</span>
+<span class="kn">from</span> <span class="nn">.header</span> <span class="kn">import</span> <span class="n">patient_ids_in_datasets_are_equal</span>
 <span class="kn">from</span> <span class="nn">.rtplan</span> <span class="kn">import</span> <span class="n">get_surface_entry_point_with_fallback</span><span class="p">,</span> <span class="n">require_gantries_be_zero</span>
 <span class="kn">from</span> <span class="nn">.structure</span> <span class="kn">import</span> <span class="n">pull_structure</span>
 
@@ -781,6 +785,73 @@
             <span class="s2">&quot;The supplied dataset has a patient &quot;</span>
             <span class="sa">f</span><span class="s2">&quot;orientation other than </span><span class="si">{</span><span class="n">patient_orientation</span><span class="si">}</span><span class="s2">.&quot;</span>
         <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">sum_doses_in_datasets</span><span class="p">(</span>
+    <span class="n">datasets</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="s2">&quot;pydicom.dataset.Dataset&quot;</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;pydicom.dataset.Dataset&quot;</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Sum two or more DICOM dose grids and save to new DICOM RT</span>
+<span class="sd">    Dose dataset&quot;</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    datasets : sequence of pydicom.dataset.Dataset</span>
+<span class="sd">        A sequence of DICOM RT Dose datasets whose doses are to be</span>
+<span class="sd">        summed.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pydicom.dataset.Dataset</span>
+<span class="sd">        A new DICOM RT Dose dataset whose dose is the sum of all doses</span>
+<span class="sd">        within `datasets`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">Modality</span> <span class="o">==</span> <span class="s2">&quot;RTDOSE&quot;</span> <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`datasets` must only contain DICOM RT Dose datasets.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">patient_ids_in_datasets_are_equal</span><span class="p">(</span><span class="n">datasets</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Patient ID must match for all datasets&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">DoseSummationType</span> <span class="o">==</span> <span class="s2">&quot;PLAN&quot;</span> <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Only DICOM RT Doses whose DoseSummationTypes are &#39;PLAN&#39; are supported&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">DoseUnits</span> <span class="o">==</span> <span class="n">datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">DoseUnits</span> <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;All DICOM RT Doses must have the same units (&#39;GY or &#39;RELATIVE&#39;)&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">coords_in_datasets_are_equal</span><span class="p">(</span><span class="n">datasets</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All dose grids must have perfectly coincident coordinates&quot;</span><span class="p">)</span>
+
+    <span class="n">ds_summed</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">datasets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">ds_summed</span><span class="o">.</span><span class="n">BitsAllocated</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">ds_summed</span><span class="o">.</span><span class="n">BitsStored</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">ds_summed</span><span class="o">.</span><span class="n">HighBit</span> <span class="o">=</span> <span class="mi">31</span>
+    <span class="n">ds_summed</span><span class="o">.</span><span class="n">DoseSummationType</span> <span class="o">=</span> <span class="s2">&quot;MULTI_PLAN&quot;</span>
+    <span class="n">ds_summed</span><span class="o">.</span><span class="n">DoseComment</span> <span class="o">=</span> <span class="s2">&quot;Summed Dose&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">DoseType</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;PHYSICAL&quot;</span><span class="p">,</span> <span class="s2">&quot;EFFECTIVE&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Only DICOM RT Doses whose DoseTypes are &#39;PHYSICAL&#39; or &quot;</span>
+            <span class="s2">&quot;&#39;EFFECTIVE&#39; are supported&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">DoseType</span> <span class="o">==</span> <span class="s2">&quot;EFFECTIVE&quot;</span> <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">):</span>
+        <span class="n">ds_summed</span><span class="o">.</span><span class="n">DoseType</span> <span class="o">=</span> <span class="s2">&quot;EFFECTIVE&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ds_summed</span><span class="o">.</span><span class="n">DoseType</span> <span class="o">=</span> <span class="s2">&quot;PHYSICAL&quot;</span>
+
+    <span class="n">doses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dose_from_dataset</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span> <span class="k">for</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">])</span>
+    <span class="n">doses_summed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">doses</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="n">ds_summed</span><span class="o">.</span><span class="n">DoseGridScaling</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">doses_summed</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="nb">int</span><span class="p">(</span><span class="n">ds_summed</span><span class="o">.</span><span class="n">HighBit</span><span class="p">))</span>
+
+    <span class="n">pixel_array_summed</span> <span class="o">=</span> <span class="p">(</span><span class="n">doses_summed</span> <span class="o">/</span> <span class="n">ds_summed</span><span class="o">.</span><span class="n">DoseGridScaling</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint32</span><span class="p">)</span>
+    <span class="n">ds_summed</span><span class="o">.</span><span class="n">PixelData</span> <span class="o">=</span> <span class="n">pixel_array_summed</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">ds_summed</span>
 </pre></div>
 
               </div>
