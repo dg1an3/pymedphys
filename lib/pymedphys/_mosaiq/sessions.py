@@ -1,16 +1,31 @@
-# prototype session and session offset calculator
+# Copyright (C) 2021 Derek Lane, Cancer Care Associates
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#     http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+"""Uses Mosaiq SQL to extract patient sessions and offsets.
+"""
 
 from datetime import datetime, timedelta
+from typing import List
 
 from pymedphys._imports import sklearn, sqlalchemy
 
-from pymedphys import mosaiq
-from pymedphys._mosaiq.connect import Connection
-
-select = sqlalchemy.sql.select
+from . import api
+from .connect import Connection
 
 
-def cluster_sessions(tx_datetimes, interval=timedelta(hours=3)):
+def cluster_sessions(tx_datetimes: List[datetime], interval=timedelta(hours=3)):
     """Clusters a list of datetime objects representing tx beam delivery times
 
     Uses the scikit-learn hierarchical clustering algorithm
@@ -37,9 +52,8 @@ def cluster_sessions(tx_datetimes, interval=timedelta(hours=3)):
     Examples
     --------
     >>> from datetime import datetime, timedelta
-    >>> test_datetimes = [datetime(2019, 12, 19) + timedelta(hours=h*5 + j)
-                    for h in range(3) for j in range(3)]
-    >>> list(cluster_sessions(test_datetimes))
+    >>> test_datetimes = [datetime(2019, 12, 19) + timedelta(hours=h*5 + j) for h in range(3) for j in range(3)]
+    >>> list(cluster_sessions(test_datetimes))     #doctest: +NORMALIZE_WHITESPACE
     [(1,
     datetime.datetime(2019, 12, 19, 0, 0),
     datetime.datetime(2019, 12, 19, 2, 0)),
@@ -88,7 +102,7 @@ def cluster_sessions(tx_datetimes, interval=timedelta(hours=3)):
     yield (current_session_number, start_session, end_session)
 
 
-def sessions_for_site(connection: Connection, sit_set_id):
+def sessions_for_site(connection: Connection, sit_set_id: int):
     """Determines the sessions for the given site (by SIT_SET_ID)
 
     uses cluster_sessions after querying for the Dose_Hst.Tx_DtTm
@@ -115,13 +129,33 @@ def sessions_for_site(connection: Connection, sit_set_id):
         .where(site_t.c.SIT_SET_ID == sit_set_id)
     )
 
+    # --- OR ---
+
+    result = api.execute(
+        connection,
+        """
+        SELECT
+            Tx_DtTm
+        FROM Dose_Hst
+        INNER JOIN
+            Site ON Site.SIT_ID = Dose_Hst.SIT_ID
+        WHERE
+            Site.SIT_SET_ID = %(sit_set_id)s
+        ORDER BY Dose_Hst.Tx_DtTm
+        """,
+        {"sit_set_id": sit_set_id},
+    )
+
     # cluster_sessions expects a sorted list, so extract
     #   the Tx_DtTm value from each row
     dose_hst_datetimes = [row[0] for row in result]
+    assert isinstance(dose_hst_datetimes[0], datetime)
     return cluster_sessions(dose_hst_datetimes)
 
 
-def session_offsets_for_site(connection, sit_set_id, interval=timedelta(hours=1)):
+def session_offsets_for_site(
+    connection: Connection, sit_set_id: int, interval=timedelta(hours=1)
+):
     """extract the session offsets (one offset per session ) for the given site
 
     Parameters
@@ -168,6 +202,34 @@ def session_offsets_for_site(connection, sit_set_id, interval=timedelta(hours=1)
                 and offset_t.c.Study_DtTm < window_end
             )
             .order(offset_t.c.Study_DtTm)
+        )
+
+        # --- OR ---
+
+        # query for offsets within the time window
+        result = api.execute(
+            connection,
+            """
+            SELECT
+                Study_DtTm,
+                Superior_Offset,
+                Anterior_Offset,
+                Lateral_Offset
+            FROM Offset
+            WHERE
+                Version = 0
+                AND Offset.Offset_State IN (1,2) -- active/complete offsets
+                AND Offset.Offset_Type IN (3,4) -- Portal/ThirdParty offsets
+                AND Offset.SIT_SET_ID = %(sit_set_id)s
+                AND %(window_start)s < Offset.Study_DtTm
+                AND Offset.Study_DtTm < %(window_end)s
+            ORDER BY Study_DtTm
+            """,
+            {
+                "sit_set_id": sit_set_id,
+                "window_start": window_start.strftime("%Y-%m-%d %H:%M"),
+                "window_end": window_end.strftime("%Y-%m-%d %H:%M"),
+            },
         )
 
         # just take the first offset, for now
