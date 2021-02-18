@@ -774,7 +774,7 @@
 <div class="section" id="listen">
 <h3>listen<a class="headerlink" href="#listen" title="Permalink to this headline">¶</a></h3>
 <p>Start a DICOM listener on the specified port</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pymedphys</span> <span class="n">dicom</span> <span class="n">listen</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">STORAGE_DIRECTORY</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="n">AETITLE</span><span class="p">]</span> <span class="n">port</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pymedphys</span> <span class="n">dicom</span> <span class="n">listen</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">BIND</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">STORAGE_DIRECTORY</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="n">AETITLE</span><span class="p">]</span> <span class="n">port</span>
 </pre></div>
 </div>
 <div class="section" id="Positional Arguments_repeat6">
@@ -788,6 +788,10 @@
 <div class="section" id="Named Arguments_repeat3">
 <h4>Named Arguments<a class="headerlink" href="#Named Arguments_repeat3" title="Permalink to this headline">¶</a></h4>
 <dl class="option-list">
+<dt><kbd>-b, --bind</kbd></dt>
+<dd><p>The IP address to bind to</p>
+<p>Default: “0.0.0.0”</p>
+</dd>
 <dt><kbd>-d, --storage_directory</kbd></dt>
 <dd><p>Default: “.”</p>
 </dd>
