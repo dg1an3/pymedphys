@@ -19,7 +19,7 @@
 from datetime import datetime, timedelta
 from typing import List
 
-from pymedphys._imports import sklearn
+from pymedphys._imports import sklearn, sqlalchemy
 
 from . import api
 from .connect import Connection
@@ -120,6 +120,17 @@ def sessions_for_site(connection: Connection, sit_set_id: int):
     generated sequence of session tuples
         same format as returned by cluster_sessions
     """
+
+    site_t = connection.get_table("Site")
+    dose_hst_t = connection.get_table("Dose_Hst")
+    result = connection.execute(
+        select(dose_hst_t.c.Tx_DtTm)
+        .join(site_t)
+        .where(site_t.c.SIT_SET_ID == sit_set_id)
+    )
+
+    # --- OR ---
+
     result = api.execute(
         connection,
         """
@@ -173,6 +184,27 @@ def session_offsets_for_site(
 
         # calculate the time window within which the offset may occur
         window_start, window_end = (start_session - interval, end_session)
+
+        offset_t = connection.get_table("Offset")
+        result = connection.execute(
+            select(
+                offset_t.c.Study_DtTm,
+                offset_t.c.Superior_Offset,
+                offset_t.c.Anterior_Offset,
+                offset_t.c.Lateral_Offset,
+            )
+            .where(
+                offset_t.c.Version == 0
+                and offset_t.c.Offset_State.in_([1, 2])
+                and offset_t.c.Offset_Type.in_([3, 4])
+                and offset_t.c.SIT_SET_ID == sit_set_id
+                and window_start < offset_t.c.Study_DtTm
+                and offset_t.c.Study_DtTm < window_end
+            )
+            .order(offset_t.c.Study_DtTm)
+        )
+
+        # --- OR ---
 
         # query for offsets within the time window
         result = api.execute(
