@@ -28,15 +28,15 @@
 
     
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/style.css" />
     
   <link rel="preload" as="script" href="../../../_static/js/index.d3f166471bb80abb5163.js">
 
@@ -48,7 +48,7 @@
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe,.cell"
@@ -412,21 +412,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -444,7 +444,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -465,13 +465,13 @@
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -498,11 +498,11 @@
     </div>
 </div>
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
                 
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
@@ -538,6 +538,7 @@
         </nav>
         
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -593,67 +594,61 @@ Requirement already satisfied: pymedphys in /home/runner/work/pymedphys/pymedphy
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1: 0.00B [00:00, ?B/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   0%|          | 8.19k/24.4M [00:01&lt;1:13:24, 5.54kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   0%|          | 8.19k/24.4M [00:01&lt;1:17:01, 5.28kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   0%|          | 16.4k/24.4M [00:01&lt;34:55, 11.6kB/s]  
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   0%|          | 16.4k/24.4M [00:01&lt;36:23, 11.2kB/s]  
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   0%|          | 41.0k/24.4M [00:01&lt;11:49, 34.4kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   0%|          | 32.8k/24.4M [00:01&lt;16:04, 25.3kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   0%|          | 81.9k/24.4M [00:01&lt;05:22, 75.5kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   0%|          | 98.3k/24.4M [00:02&lt;04:16, 94.7kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   1%|          | 197k/24.4M [00:02&lt;01:55, 210kB/s]  
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   1%|          | 213k/24.4M [00:02&lt;01:48, 222kB/s]  
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   2%|▏         | 401k/24.4M [00:02&lt;00:52, 455kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   2%|▏         | 426k/24.4M [00:02&lt;00:50, 472kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   3%|▎         | 819k/24.4M [00:02&lt;00:23, 985kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   4%|▎         | 885k/24.4M [00:02&lt;00:22, 1.05MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   7%|▋         | 1.65M/24.4M [00:02&lt;00:11, 2.07MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:   7%|▋         | 1.79M/24.4M [00:02&lt;00:10, 2.25MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  11%|█▏        | 2.78M/24.4M [00:02&lt;00:06, 3.34MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  15%|█▍        | 3.60M/24.4M [00:02&lt;00:04, 4.67MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  18%|█▊        | 4.50M/24.4M [00:02&lt;00:03, 5.39MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  27%|██▋       | 6.57M/24.4M [00:03&lt;00:02, 8.47MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  24%|██▍       | 5.84M/24.4M [00:03&lt;00:02, 6.28MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  40%|███▉      | 9.67M/24.4M [00:03&lt;00:01, 10.8MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  32%|███▏      | 7.77M/24.4M [00:03&lt;00:02, 7.95MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  40%|███▉      | 9.69M/24.4M [00:03&lt;00:01, 8.39MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  40%|███▉      | 9.73M/24.4M [00:03&lt;00:01, 9.18MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  52%|█████▏    | 12.8M/24.4M [00:03&lt;00:00, 11.6MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  48%|████▊     | 11.7M/24.4M [00:03&lt;00:01, 10.1MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  61%|██████    | 14.8M/24.4M [00:03&lt;00:00, 11.9MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  56%|█████▋    | 13.7M/24.4M [00:03&lt;00:00, 10.8MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  65%|██████▌   | 15.9M/24.4M [00:03&lt;00:00, 10.2MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  65%|██████▍   | 15.8M/24.4M [00:03&lt;00:00, 11.3MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  77%|███████▋  | 18.8M/24.4M [00:03&lt;00:00, 12.4MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  73%|███████▎  | 17.9M/24.4M [00:04&lt;00:00, 11.7MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  87%|████████▋ | 21.2M/24.4M [00:04&lt;00:00, 13.1MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  82%|████████▏ | 20.0M/24.4M [00:04&lt;00:00, 12.1MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  99%|█████████▉| 24.3M/24.4M [00:04&lt;00:00, 15.0MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  91%|█████████ | 22.1M/24.4M [00:04&lt;00:00, 12.4MB/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1:  99%|█████████▉| 24.2M/24.4M [00:04&lt;00:00, 12.7MB/s]
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1: 24.4MB [00:04, 5.35MB/s]                            
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original_dose_beam_4.dcm?download=1: 24.4MB [00:04, 5.66MB/s]                            
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -675,64 +670,79 @@ Requirement already satisfied: pymedphys in /home/runner/work/pymedphys/pymedphy
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1: 0.00B [00:00, ?B/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   0%|          | 8.19k/24.4M [00:01&lt;1:08:02, 5.98kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   0%|          | 8.19k/24.4M [00:01&lt;58:21, 6.97kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   0%|          | 16.4k/24.4M [00:01&lt;32:42, 12.4kB/s]  
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   0%|          | 16.4k/24.4M [00:01&lt;28:43, 14.1kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   0%|          | 41.0k/24.4M [00:01&lt;11:11, 36.3kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   0%|          | 41.0k/24.4M [00:01&lt;10:03, 40.4kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   0%|          | 81.9k/24.4M [00:01&lt;05:08, 78.9kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   0%|          | 81.9k/24.4M [00:01&lt;04:43, 85.9kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   1%|          | 188k/24.4M [00:02&lt;01:57, 206kB/s]  
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   1%|          | 188k/24.4M [00:01&lt;01:50, 220kB/s]  
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   2%|▏         | 401k/24.4M [00:02&lt;00:50, 471kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   2%|▏         | 385k/24.4M [00:01&lt;00:51, 470kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   3%|▎         | 811k/24.4M [00:02&lt;00:23, 996kB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   2%|▏         | 541k/24.4M [00:02&lt;00:39, 600kB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   7%|▋         | 1.66M/24.4M [00:02&lt;00:10, 2.14MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   4%|▎         | 877k/24.4M [00:02&lt;00:23, 1.01MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  14%|█▎        | 3.34M/24.4M [00:02&lt;00:04, 4.41MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:   7%|▋         | 1.78M/24.4M [00:02&lt;00:09, 2.29MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  22%|██▏       | 5.32M/24.4M [00:02&lt;00:02, 6.62MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  13%|█▎        | 3.24M/24.4M [00:02&lt;00:05, 4.23MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  30%|███       | 7.36M/24.4M [00:02&lt;00:02, 8.34MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  19%|█▉        | 4.75M/24.4M [00:02&lt;00:03, 5.65MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  39%|███▉      | 9.47M/24.4M [00:03&lt;00:01, 9.66MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  32%|███▏      | 7.73M/24.4M [00:02&lt;00:01, 9.37MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  48%|████▊     | 11.6M/24.4M [00:03&lt;00:01, 10.7MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  35%|███▌      | 8.64M/24.4M [00:03&lt;00:01, 8.20MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  56%|█████▋    | 13.8M/24.4M [00:03&lt;00:00, 11.5MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  47%|████▋     | 11.5M/24.4M [00:03&lt;00:01, 11.0MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  66%|██████▌   | 16.0M/24.4M [00:03&lt;00:00, 12.1MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  51%|█████▏    | 12.5M/24.4M [00:03&lt;00:01, 9.50MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  75%|███████▍  | 18.3M/24.4M [00:03&lt;00:00, 12.7MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  59%|█████▉    | 14.4M/24.4M [00:03&lt;00:00, 10.3MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  84%|████████▍ | 20.5M/24.4M [00:03&lt;00:00, 13.0MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  64%|██████▎   | 15.5M/24.4M [00:03&lt;00:00, 9.25MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  94%|█████████▍| 22.9M/24.4M [00:04&lt;00:00, 13.5MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  68%|██████▊   | 16.6M/24.4M [00:03&lt;00:00, 8.54MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  98%|█████████▊| 24.0M/24.4M [00:04&lt;00:00, 11.3MB/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  73%|███████▎  | 17.8M/24.4M [00:04&lt;00:00, 8.05MB/s]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1: 24.4MB [00:04, 5.67MB/s]                            
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  77%|███████▋  | 18.9M/24.4M [00:04&lt;00:00, 7.73MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  82%|████████▏ | 20.0M/24.4M [00:04&lt;00:00, 7.53MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  87%|████████▋ | 21.2M/24.4M [00:04&lt;00:00, 7.42MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  92%|█████████▏| 22.3M/24.4M [00:04&lt;00:00, 7.38MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1:  96%|█████████▋| 23.5M/24.4M [00:04&lt;00:00, 7.36MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>logfile_dose_beam_4.dcm?download=1: 24.4MB [00:04, 4.97MB/s]                            
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>

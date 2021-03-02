@@ -28,15 +28,15 @@
 
     
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
     
   <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
@@ -48,7 +48,7 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe,.cell"
@@ -412,21 +412,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -444,7 +444,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -465,19 +465,19 @@
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
                 
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
@@ -520,6 +520,7 @@
         </nav>
         
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -539,7 +540,7 @@
 <h3>Anonymisation<a class="headerlink" href="#anonymisation" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="pymedphys.dicom.anonymise">
-<code class="sig-prename descclassname">pymedphys.dicom.</code><code class="sig-name descname">anonymise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ds</span></em>, <em class="sig-param"><span class="n">replace_values</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">keywords_to_leave_unchanged</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">delete_private_tags</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">delete_unknown_tags</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">copy_dataset</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">replacement_strategy</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">identifying_keywords</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymedphys.dicom.anonymise" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pymedphys.dicom.</span></code><code class="sig-name descname"><span class="pre">anonymise</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords_to_leave_unchanged</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_private_tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_unknown_tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replacement_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifying_keywords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymedphys.dicom.anonymise" title="Permalink to this definition">¶</a></dt>
 <dd><p>A simple tool to anonymise a DICOM dataset.</p>
 <p>You can find the list of DICOM keywords that are included in default
 anonymisation <a class="reference external" href="./identifying_keywords.json">here</a>.
@@ -591,12 +592,12 @@ information.</p></li>
 <p>A suite of functions for manipulating dose in a DICOM context.</p>
 <dl class="py function">
 <dt id="pymedphys.dicom.zyx_and_dose_from_dataset">
-<code class="sig-prename descclassname">pymedphys.dicom.</code><code class="sig-name descname">zyx_and_dose_from_dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pymedphys/_dicom/dose.html#zyx_and_dose_from_dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedphys.dicom.zyx_and_dose_from_dataset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pymedphys.dicom.</span></code><code class="sig-name descname"><span class="pre">zyx_and_dose_from_dataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pymedphys/_dicom/dose.html#zyx_and_dose_from_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedphys.dicom.zyx_and_dose_from_dataset" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt id="pymedphys.dicom.depth_dose">
-<code class="sig-prename descclassname">pymedphys.dicom.</code><code class="sig-name descname">depth_dose</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">depths</span></em>, <em class="sig-param"><span class="n">dose_dataset</span></em>, <em class="sig-param"><span class="n">plan_dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pymedphys/_dicom/dose.html#depth_dose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedphys.dicom.depth_dose" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pymedphys.dicom.</span></code><code class="sig-name descname"><span class="pre">depth_dose</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dose_dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plan_dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pymedphys/_dicom/dose.html#depth_dose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedphys.dicom.depth_dose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolates dose for defined depths within a DICOM dose dataset.</p>
 <p>Since the DICOM dose dataset is in CT coordinates the corresponding
 DICOM plan is also required in order to calculate the conversion
@@ -623,7 +624,7 @@ angle 0 beams are used.</p></li>
 
 <dl class="py function">
 <dt id="pymedphys.dicom.profile">
-<code class="sig-prename descclassname">pymedphys.dicom.</code><code class="sig-name descname">profile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">displacements</span></em>, <em class="sig-param"><span class="n">depth</span></em>, <em class="sig-param"><span class="n">direction</span></em>, <em class="sig-param"><span class="n">dose_dataset</span></em>, <em class="sig-param"><span class="n">plan_dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pymedphys/_dicom/dose.html#profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedphys.dicom.profile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pymedphys.dicom.</span></code><code class="sig-name descname"><span class="pre">profile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">displacements</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dose_dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plan_dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pymedphys/_dicom/dose.html#profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedphys.dicom.profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolates dose for cardinal angle horizontal profiles within a
 DICOM dose dataset.</p>
 <p>Since the DICOM dose dataset is in CT coordinates the corresponding
@@ -663,7 +664,7 @@ parameters and verify gantry angle 0 beams are used.</p></li>
 
 <dl class="py function">
 <dt id="pymedphys.dicom.dicom_dose_interpolate">
-<code class="sig-prename descclassname">pymedphys.dicom.</code><code class="sig-name descname">dicom_dose_interpolate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">interp_coords</span></em>, <em class="sig-param"><span class="n">dicom_dose_dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pymedphys/_dicom/dose.html#dicom_dose_interpolate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pymedphys.dicom.dicom_dose_interpolate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pymedphys.dicom.</span></code><code class="sig-name descname"><span class="pre">dicom_dose_interpolate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interp_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dicom_dose_dataset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/pymedphys/_dicom/dose.html#dicom_dose_interpolate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymedphys.dicom.dicom_dose_interpolate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interpolates across a DICOM dose dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

@@ -28,15 +28,15 @@
 
     
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/style.css" />
     
   <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
@@ -48,7 +48,7 @@
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe,.cell"
@@ -412,21 +412,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -444,7 +444,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -465,19 +465,19 @@
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
                 
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
@@ -508,6 +508,7 @@
         </nav>
         
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -542,7 +543,7 @@ hardware or calibration fault.</p>
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="pymedphys.metersetmap.calculate">
-<code class="sig-prename descclassname">pymedphys.metersetmap.</code><code class="sig-name descname">calculate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">mlc</span></em>, <em class="sig-param"><span class="n">jaw</span></em>, <em class="sig-param"><span class="n">grid_resolution</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">max_leaf_gap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">leaf_pair_widths</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_step_per_pixel</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymedphys.metersetmap.calculate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pymedphys.metersetmap.</span></code><code class="sig-name descname"><span class="pre">calculate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mlc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jaw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_leaf_gap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_pair_widths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_step_per_pixel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymedphys.metersetmap.calculate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine the MetersetMap.</p>
 <p>Both jaw and mlc positions are defined in bipolar format for each control
 point. A negative value indicates travel over the isocentre. All positional
@@ -695,7 +696,7 @@ used per pixel for each control point. Defaults to 10.</p></li>
 
 <dl class="py function">
 <dt id="pymedphys.metersetmap.grid">
-<code class="sig-prename descclassname">pymedphys.metersetmap.</code><code class="sig-name descname">grid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_leaf_gap</span><span class="o">=</span><span class="default_value">400</span></em>, <em class="sig-param"><span class="n">grid_resolution</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">leaf_pair_widths</span><span class="o">=</span><span class="default_value">(5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymedphys.metersetmap.grid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pymedphys.metersetmap.</span></code><code class="sig-name descname"><span class="pre">grid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_leaf_gap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf_pair_widths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5,</span> <span class="pre">5)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymedphys.metersetmap.grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the MetersetMap grid for plotting purposes.</p>
 <p class="rubric">Examples</p>
 <p>See <a class="reference internal" href="#pymedphys.metersetmap.calculate" title="pymedphys.metersetmap.calculate"><code class="xref py py-func docutils literal notranslate"><span class="pre">pymedphys.metersetmap.calculate()</span></code></a>.</p>
@@ -703,7 +704,7 @@ used per pixel for each control point. Defaults to 10.</p></li>
 
 <dl class="py function">
 <dt id="pymedphys.metersetmap.display">
-<code class="sig-prename descclassname">pymedphys.metersetmap.</code><code class="sig-name descname">display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">grid</span></em>, <em class="sig-param"><span class="n">metersetmap</span></em>, <em class="sig-param"><span class="n">grid_resolution</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cmap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vmin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vmax</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymedphys.metersetmap.display" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">pymedphys.metersetmap.</span></code><code class="sig-name descname"><span class="pre">display</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metersetmap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymedphys.metersetmap.display" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints a colour plot of the MetersetMap.</p>
 <p class="rubric">Examples</p>
 <p>See <a class="reference internal" href="#pymedphys.metersetmap.calculate" title="pymedphys.metersetmap.calculate"><code class="xref py py-func docutils literal notranslate"><span class="pre">pymedphys.metersetmap.calculate()</span></code></a>.</p>
