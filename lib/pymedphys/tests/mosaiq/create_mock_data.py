@@ -26,6 +26,9 @@ PROB_OFFSET_BY_PROTOCOL = {
     "nal": lambda session_num: 95 if session_num <= 4 else 20,
 }
 
+# parameters for systematic offset
+MU_0_PRIOR, K0_PRIOR = (0.0, 0.0, 0.0), 1.0
+
 
 def dataframe_to_sql(df, tablename, index_label, dtype=None):
     """using a pd.DataFrame, populate a table in the configured database
@@ -62,7 +65,7 @@ def dataframe_to_sql(df, tablename, index_label, dtype=None):
 
 
 def check_create_test_db():
-    """ will create the test database, if it does not already exist on the instance """
+    """will create the test database, if it does not already exist on the instance"""
 
     # sa connection to create the test database
     with pymssql.connect(
@@ -122,7 +125,7 @@ def create_mock_patients():
     return patient_ident_df
 
 
-def create_mock_treatment_sites(patient_ident_df=None):
+def create_mock_treatment_sites(patient_ident_df=None, rng=np.random.default_rng()):
     """create mock treatment sites for the patient dataframe passed in
         or call create_mock_patients if None is passed
 
@@ -163,7 +166,7 @@ def create_mock_treatment_sites(patient_ident_df=None):
     return site_df
 
 
-def create_mock_treatment_fields(site_df=None):
+def create_mock_treatment_fields(site_df=None, rng=np.random.default_rng()):
     """create mock treatment sites for the site dataframe passed in
     or call create_mock_treatment_sites if None is passed
 
@@ -180,43 +183,29 @@ def create_mock_treatment_fields(site_df=None):
     """
 
     if site_df is None:
-        site_df = create_mock_treatment_sites()
+        site_df = create_mock_treatment_sites(rng)
+
+    rowversion = 1000
 
     # populate a list of tx_fields, 3 for each site
     tx_fields = []
     for sit_set_id, site in site_df.iterrows():
+        technique = site["Technique"]
+        field_count = FIELD_COUNT_BY_TECHNIQUE_NAME[technique]
         tx_fields += [
             (
-                "A",
-                "FieldA",
-                1,
+                f"B{n}",
+                f"AtGantry{n * (360 // field_count)}",
+                0,
                 "MU",
                 1,
                 site["Pat_ID1"],
                 sit_set_id,
-                pack(">Q", 1000),
-            ),
-            (
-                "B",
-                "FieldB",
-                1,
-                "MU",
-                1,
-                site["Pat_ID1"],
-                sit_set_id,
-                pack(">Q", 1002),
-            ),
-            (
-                "C",
-                "FieldC",
-                1,
-                "MU",
-                1,
-                site["Pat_ID1"],
-                sit_set_id,
-                pack(">Q", 1004),
-            ),
+                pack(">Q", rowversion + n * 5),
+            )
+            for n in range(field_count)
         ]
+        rowversion += 5 * field_count
 
     # now create the tx_field dataframe
     txfield_df = pd.DataFrame(
@@ -243,61 +232,30 @@ def create_mock_treatment_fields(site_df=None):
         },
     )
 
-    txfieldpoints = []
-    for fld_id, _ in txfield_df.iterrows():
-        txfieldpoints += [
+    txfield_points = []
+    for fld_id, txfield in txfield_df.iterrows():
+        gantry_angle_matches = re.search("AtGantry([0-9]*)", txfield["Field_Name"])
+        gantry_angle = int(gantry_angle_matches.group(1))
+        point_count = 4
+        txfield_points += [
             (
                 fld_id,
-                0,
-                0.0,
-                pack("hhl", 1, 2, 3),
-                pack("hhl", 1, 2, 3),
-                90.0,
-                0.0,
-                2.6,
-                4.2,
-                pack(">Q", 1008),
-            ),
-            (
-                fld_id,
-                1,
-                0.1,
-                pack("hhl", 1, 2, 3),
-                pack("hhl", 1, 2, 3),
-                180.0,
-                90.0,
-                0.0,
-                4.2,
-                pack(">Q", 1012),
-            ),
-            (
-                fld_id,
-                2,
-                0.7,
-                pack("hhl", 1, 2, 3),
-                pack("hhl", 1, 2, 3),
-                270.0,
-                180.0,
-                0.0,
-                4.2,
-                pack(">Q", 1014),
-            ),
-            (
-                fld_id,
-                3,
-                1.0,
-                pack("hhl", 1, 2, 3),
-                pack("hhl", 1, 2, 3),
-                0.0,
-                270.0,
-                0.0,
-                4.2,
-                pack(">Q", 1015),
-            ),
+                0,  # Point
+                n / 10.0,  # Index
+                pack("hhl", 1, 2, 3),  # A Leaf Set
+                pack("hhl", 1, 2, 3),  # B Leaf Set
+                gantry_angle,
+                0.0,  # Collimator angle
+                n / 10.0 + 2.3,  # Collimator Y1
+                n / 10.0 + 4.2,  # Collimator Y2
+                pack(">Q", rowversion + n * 5),
+            )
+            for n in range(point_count)
         ]
+        rowversion += 5 * point_count
 
-    txfieldpoints_df = pd.DataFrame(
-        txfieldpoints,
+    txfield_points_df = pd.DataFrame(
+        txfield_points,
         columns=[
             "FLD_ID",
             "Point",
@@ -311,10 +269,10 @@ def create_mock_treatment_fields(site_df=None):
             "RowVers",
         ],
     )
-    txfieldpoints_df.index += 1
+    txfield_points_df.index += 1
 
     dataframe_to_sql(
-        txfieldpoints_df,
+        txfield_points_df,
         "TxFieldPoint",
         index_label="TFP_ID",
         dtype={
@@ -332,7 +290,9 @@ def create_mock_treatment_fields(site_df=None):
     return txfield_df
 
 
-def create_mock_treatment_sessions(site_df=None, txfield_df=None):
+def create_mock_treatment_sessions(
+    site_df=None, txfield_df=None, rng=np.random.default_rng()
+):
     """for a given site and set of tx fields, generate treatment session data
     (Dose_Hst and Offset) for randomly chosen treatment interval
 
@@ -345,10 +305,10 @@ def create_mock_treatment_sessions(site_df=None, txfield_df=None):
     """
 
     if site_df is None:
-        site_df = create_mock_treatment_sites()
+        site_df = create_mock_treatment_sites(rng)
 
     if txfield_df is None:
-        txfield_df = create_mock_treatment_fields(site_df)
+        txfield_df = create_mock_treatment_fields(site_df, rng)
 
     # lists to store the offsets and dose_hst records
     offset_recs, dose_hst_recs = [], []
